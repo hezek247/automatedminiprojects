@@ -14,7 +14,7 @@ async def newsfeed():
 
             await page.goto(url)
 
-            await page.wait_for_selector("h2.text-2xl")
+            await page.wait_for_load_state()
             
             container = page.locator('div.align-start a')
             
@@ -41,7 +41,7 @@ async def newsfeed():
                 content = await page.locator('p.text-muted-background').all_inner_texts()
                 cont = [ text for text in content if text ]
                 converted_text = "".join(cont)
-                mail = Mail(to="receiver@gmail.com",subject=title,content=converted_text)
+                mail = Mail(to="grechenhanibal247@gmail.com",subject=title,content=converted_text)
                 mail.sendmail()
                 await asyncio.sleep(5)
 
